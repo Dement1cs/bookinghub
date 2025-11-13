@@ -1,0 +1,25 @@
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/date-3.5.0/ext/date
+D:/Programs/Ruby34-x64/bin/ruby.exe extconf.rb
+checking for rb_category_warn()... yes
+checking for timezone in time.h with -Werror... no
+checking for altzone in time.h with -Werror... no
+creating Makefile
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/date-3.5.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-nrbddk sitelibdir\=./.gem.20251112-185684-nrbddk clean
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/date-3.5.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-nrbddk sitelibdir\=./.gem.20251112-185684-nrbddk
+generating date_core-x64-mingw-ucrt.def
+compiling date_core.c
+compiling date_parse.c
+compiling date_strftime.c
+compiling date_strptime.c
+linking shared-object date_core.so
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/date-3.5.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-nrbddk sitelibdir\=./.gem.20251112-185684-nrbddk install
+/usr/bin/install -c -m 0755 date_core.so ./.gem.20251112-185684-nrbddk
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/date-3.5.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-nrbddk sitelibdir\=./.gem.20251112-185684-nrbddk clean

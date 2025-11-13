@@ -1,0 +1,20 @@
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/stringio-3.1.8/ext/stringio
+D:/Programs/Ruby34-x64/bin/ruby.exe extconf.rb
+checking for rb_io_mode_t in ruby/io.h... no
+creating Makefile
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/stringio-3.1.8/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-j23l9b sitelibdir\=./.gem.20251112-185684-j23l9b clean
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/stringio-3.1.8/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-j23l9b sitelibdir\=./.gem.20251112-185684-j23l9b
+generating stringio-x64-mingw-ucrt.def
+compiling stringio.c
+linking shared-object stringio.so
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/stringio-3.1.8/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-j23l9b sitelibdir\=./.gem.20251112-185684-j23l9b install
+/usr/bin/install -c -m 0755 stringio.so ./.gem.20251112-185684-j23l9b
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/stringio-3.1.8/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-j23l9b sitelibdir\=./.gem.20251112-185684-j23l9b clean

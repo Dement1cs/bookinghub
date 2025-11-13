@@ -1,0 +1,18 @@
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/nio4r-2.7.5/ext/nio4r
+D:/Programs/Ruby34-x64/bin/ruby.exe extconf.rb
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/nio4r-2.7.5/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-5gonn4 sitelibdir\=./.gem.20251112-185684-5gonn4 clean
+make: *** Нет правила для сборки цели «clean».  Останов.
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/nio4r-2.7.5/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-5gonn4 sitelibdir\=./.gem.20251112-185684-5gonn4
+make: Цель «all» не требует выполнения команд.
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/nio4r-2.7.5/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-5gonn4 sitelibdir\=./.gem.20251112-185684-5gonn4 install
+make: Цель «install» не требует выполнения команд.
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/nio4r-2.7.5/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-5gonn4 sitelibdir\=./.gem.20251112-185684-5gonn4 clean
+make: *** Нет правила для сборки цели «clean».  Останов.

@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  username: postgres
+  password: postgres  
+  host: localhost
+
+development:
+  <<: *default
+  database: bookinghub_development
+
+test:
+  <<: *default
+  database: bookinghub_test
+
+production:
+  <<: *default
+  database: bookinghub_production

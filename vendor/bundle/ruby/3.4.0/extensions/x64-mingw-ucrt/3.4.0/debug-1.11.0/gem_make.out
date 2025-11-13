@@ -1,0 +1,20 @@
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+D:/Programs/Ruby34-x64/bin/ruby.exe extconf.rb
+creating Makefile
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-xpwmiz sitelibdir\=./.gem.20251112-185684-xpwmiz clean
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-xpwmiz sitelibdir\=./.gem.20251112-185684-xpwmiz
+generating debug-x64-mingw-ucrt.def
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-xpwmiz sitelibdir\=./.gem.20251112-185684-xpwmiz install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20251112-185684-xpwmiz/debug
+
+current directory: D:/NCI/NCI4/cloud/CA/bookinghub/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20251112-185684-xpwmiz sitelibdir\=./.gem.20251112-185684-xpwmiz clean

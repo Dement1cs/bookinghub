@@ -27,13 +27,8 @@
   </div>
 
   <div>
-    <%= form.label :room_id, style: "display: block" %>
-    <%= form.text_field :room_id %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <%= form.label :room_id, "Room", style: "display: block" %>
+    <%= form.collection_select :room_id, Room.all, :id, :name, prompt: "Select a room" %>
   </div>
 
   <div>

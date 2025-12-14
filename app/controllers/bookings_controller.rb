@@ -22,15 +22,12 @@ class BookingsController < ApplicationController
   # POST /bookings or /bookings.json
   def create
     @booking = Booking.new(booking_params)
+    @booking.user = current_user
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: "Booking was successfully created." }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      redirect_to @booking, notice: "Booking was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -60,11 +57,11 @@ class BookingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
-      @booking = Booking.find(params.expect(:id))
+      @booking = Booking.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.expect(booking: [ :starts_at, :ends_at, :note, :room_id, :user_id ])
+      params.expect(booking: [ :starts_at, :ends_at, :note, :room_id ])
     end
 end

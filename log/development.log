@@ -2026,3 +2026,151 @@ FOREIGN KEY ("user_id")
   [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-12-15 21:56:19.867102' WHERE "ar_internal_metadata"."key" = 'environment' /*application='Bookinghub'*/[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Bookinghub'*/[0m
   [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'df81f9f92e730c144f9c1117f09b41933e08b361', '2025-12-15 21:56:19.869271', '2025-12-15 21:56:19.869272') RETURNING "key" /*application='Bookinghub'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-12-16 01:58:34 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Bookinghub'*/[0m
+DEPRECATION WARNING: resource received a hash argument only. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at D:/NCI/NCI4/cloud/CA/clone/bookinghub/config/routes.rb:4)
+DEPRECATION WARNING: resource received a hash argument path. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at D:/NCI/NCI4/cloud/CA/clone/bookinghub/config/routes.rb:4)
+DEPRECATION WARNING: resource received a hash argument path_names. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at D:/NCI/NCI4/cloud/CA/clone/bookinghub/config/routes.rb:4)
+DEPRECATION WARNING: resource received a hash argument controller. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at D:/NCI/NCI4/cloud/CA/clone/bookinghub/config/routes.rb:4)
+Processing by RoomsController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering rooms/index.html.erb within layouts/application
+  [1m[36mRoom Load (1.2ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/views/rooms/index.html.erb:18
+  Rendered rooms/index.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.3ms | GC: 0.0ms)
+Completed 200 OK in 210ms (Views: 24.0ms | ActiveRecord: 111.3ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2025-12-16 01:58:36 +0000
+Processing by RoomsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='new',application='Bookinghub',controller='rooms'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering rooms/new.html.erb within layouts/application
+  Rendered rooms/_form.html.erb (Duration: 8.5ms | GC: 0.0ms)
+  Rendered rooms/new.html.erb within layouts/application (Duration: 10.2ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.0ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 12.6ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2025-12-16 01:58:44 +0000
+Processing by RoomsController#create as HTML
+  Parameters: {"authenticity_token" => "[FILTERED]", "room" => {"name" => "Room A", "capacity" => "3"}, "commit" => "Create Room"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='Bookinghub',controller='rooms'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/controllers/rooms_controller.rb:27:in 'block in RoomsController#create'
+  [1m[36mRoom Create (5.4ms)[0m  [1m[32mINSERT INTO "rooms" ("name", "capacity", "created_at", "updated_at") VALUES ('Room A', 3, '2025-12-16 01:58:44.641780', '2025-12-16 01:58:44.641780') RETURNING "id" /*action='create',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/controllers/rooms_controller.rb:27:in 'block in RoomsController#create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/controllers/rooms_controller.rb:27:in 'block in RoomsController#create'
+Redirected to http://127.0.0.1:3000/rooms/8
+↳ app/controllers/rooms_controller.rb:28:in 'block (2 levels) in RoomsController#create'
+Completed 302 Found in 17ms (ActiveRecord: 6.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rooms/8" for 127.0.0.1 at 2025-12-16 01:58:44 +0000
+Processing by RoomsController#show as HTML
+  Parameters: {"id" => "8"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='show',application='Bookinghub',controller='rooms'*/[0m
+  [1m[36mRoom Load (0.2ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" WHERE "rooms"."id" = 8 LIMIT 1 /*action='show',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/controllers/rooms_controller.rb:63:in 'RoomsController#set_room'
+  Rendering layout layouts/application.html.erb
+  Rendering rooms/show.html.erb within layouts/application
+  Rendered rooms/_room.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered rooms/show.html.erb within layouts/application (Duration: 5.2ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 7.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/bookings" for 127.0.0.1 at 2025-12-16 01:58:46 +0000
+Processing by BookingsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering bookings/index.html.erb within layouts/application
+  [1m[36mBooking Load (1.8ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."user_id" = 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  ↳ app/views/bookings/index.html.erb:20
+  Rendered bookings/index.html.erb within layouts/application (Duration: 11.3ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | GC: 0.0ms)
+Completed 200 OK in 40ms (Views: 16.1ms | ActiveRecord: 3.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/bookings/new" for 127.0.0.1 at 2025-12-16 01:58:49 +0000
+Processing by BookingsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='new',application='Bookinghub',controller='bookings'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering bookings/new.html.erb within layouts/application
+  [1m[36mRoom Load (0.3ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" /*action='new',application='Bookinghub',controller='bookings'*/[0m
+  ↳ app/views/bookings/_form.html.erb:18
+  Rendered bookings/_form.html.erb (Duration: 11.3ms | GC: 0.0ms)
+  Rendered bookings/new.html.erb within layouts/application (Duration: 12.9ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.4ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 14.7ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rooms" for 127.0.0.1 at 2025-12-16 01:59:28 +0000
+Processing by RoomsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering rooms/index.html.erb within layouts/application
+  [1m[36mRoom Load (0.3ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/views/rooms/index.html.erb:18
+  Rendered rooms/index.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 3.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/bookings" for 127.0.0.1 at 2025-12-16 01:59:30 +0000
+Processing by BookingsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering bookings/index.html.erb within layouts/application
+  [1m[36mBooking Load (0.3ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."user_id" = 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  ↳ app/views/bookings/index.html.erb:20
+  Rendered bookings/index.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/bookings" for 127.0.0.1 at 2025-12-16 01:59:30 +0000
+Processing by BookingsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering bookings/index.html.erb within layouts/application
+  [1m[36mBooking Load (0.4ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."user_id" = 1 /*action='index',application='Bookinghub',controller='bookings'*/[0m
+  ↳ app/views/bookings/index.html.erb:20
+  Rendered bookings/index.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 10ms (Views: 4.0ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rooms" for 127.0.0.1 at 2025-12-16 01:59:31 +0000
+Processing by RoomsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  Rendering layout layouts/application.html.erb
+  Rendering rooms/index.html.erb within layouts/application
+  [1m[36mRoom Load (0.3ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" /*action='index',application='Bookinghub',controller='rooms'*/[0m
+  ↳ app/views/rooms/index.html.erb:18
+  Rendered rooms/index.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered shared/_flash.html.erb (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 3.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

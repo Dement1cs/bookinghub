@@ -1,27 +1,29 @@
 <%= form_with(model: room) do |form| %>
   <% if room.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
-      <ul>
-        <% room.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="alert alert-danger">
+      <div class="fw-bold mb-2">
+        <%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:
+      </div>
+      <ul class="mb-0">
+        <% room.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "e.g. Conference Room A" %>
   </div>
 
-  <div>
-    <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity %>
+  <div class="mb-3">
+    <%= form.label :capacity, class: "form-label" %>
+    <%= form.number_field :capacity, class: "form-control", min: 1 %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-flex gap-2">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Back", rooms_path, class: "btn btn-outline-secondary" %>
   </div>
 <% end %>

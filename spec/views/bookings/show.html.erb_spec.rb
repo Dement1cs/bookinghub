@@ -1,18 +1,26 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "bookings/show", type: :view do
-  before(:each) do
-    assign(:booking, Booking.create!(
+  let!(:user) { User.create!(email: "u_show@example.com", password: "password", password_confirmation: "password") }
+  let!(:room) { Room.create!(name: "Room Show", capacity: 10) }
+
+  let!(:booking) do
+    Booking.create!(
       note: "Note",
-      room: nil,
-      user: nil
-    ))
+      room: room,
+      user: user,
+      starts_at: Time.zone.parse("2025-01-01 10:00"),
+      ends_at:   Time.zone.parse("2025-01-01 11:00")
+    )
   end
 
-  it "renders attributes in <p>" do
+  before do
+    assign(:booking, booking)
+  end
+
+  it "renders attributes" do
     render
-    expect(rendered).to match(/Note/)
-    expect(rendered).to match(//)
-    expect(rendered).to match(//)
+    expect(rendered).to include("Note")
+    expect(rendered).to include("Room Show").or include(room.id.to_s)
   end
 end

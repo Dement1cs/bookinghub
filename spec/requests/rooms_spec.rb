@@ -17,13 +17,21 @@ RSpec.describe "/rooms", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let!(:user) do
+    User.create!(email: "test@example.com", password: "password", password_confirmation: "password")
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  before do
+    sign_in user
+  end
+
+  let(:valid_attributes) do
+    { name: "Room 1", capacity: 10 }
+  end
+
+  let(:invalid_attributes) do
+    { name: "", capacity: 10 }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -85,31 +93,31 @@ RSpec.describe "/rooms", type: :request do
   end
 
   describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    let(:new_attributes) do
+      { name: "Room Updated", capacity: 15 }
+    end
 
+    context "with valid parameters" do
       it "updates the requested room" do
-        room = Room.create! valid_attributes
+        room = Room.create!(valid_attributes)
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        skip("Add assertions for updated state")
+        expect(room.name).to eq("Room Updated")
+        expect(room.capacity).to eq(15)
       end
 
       it "redirects to the room" do
-        room = Room.create! valid_attributes
+        room = Room.create!(valid_attributes)
         patch room_url(room), params: { room: new_attributes }
-        room.reload
         expect(response).to redirect_to(room_url(room))
       end
     end
 
     context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        room = Room.create! valid_attributes
+      it "renders a response with 422 status" do
+        room = Room.create!(valid_attributes)
         patch room_url(room), params: { room: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_content)
+        expect(response).to have_http_status(422)
       end
     end
   end

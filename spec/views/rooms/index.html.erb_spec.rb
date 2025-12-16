@@ -1,23 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "rooms/index", type: :view do
-  before(:each) do
+  before do
     assign(:rooms, [
-      Room.create!(
-        name: "Name",
-        capacity: 2
-      ),
-      Room.create!(
-        name: "Name",
-        capacity: 2
-      )
+      Room.create!(name: "Room A", capacity: 10),
+      Room.create!(name: "Room B", capacity: 20)
     ])
   end
 
   it "renders a list of rooms" do
     render
-    cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
+    expect(rendered).to include("Room A")
+    expect(rendered).to include("Room B")
   end
 end

@@ -20,7 +20,7 @@ class Booking < ApplicationRecord
 
     overlap = Booking
       .where(room_id: room_id)
-      .where.not(id: id) # важно для update
+      .where.not(id: id) 
       .where("starts_at < ? AND ends_at > ?", ends_at, starts_at)
       .exists?
 

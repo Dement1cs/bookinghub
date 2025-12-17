@@ -1,123 +1,139 @@
+# spec/requests/bookings_spec.rb
 require "rails_helper"
 
-RSpec.describe "/rooms", type: :request do
-  let!(:user) do
-    User.create!(email: "test@example.com", password: "password", password_confirmation: "password")
+RSpec.describe "/bookings", type: :request do
+  # Helper: stable ISO8601 strings for datetime params
+  def dt(str)
+    Time.zone.parse(str).iso8601
   end
 
-  before do
-    sign_in user
-  end
-
-  let(:valid_attributes) do
-    { name: "Room A", capacity: 10 }
-  end
-
-  let(:invalid_attributes) do
-    { name: "", capacity: 0 }
-  end
+  let!(:room) { create(:room) }
+  let!(:user) { create(:user) }
 
   describe "GET /index" do
-    it "renders a successful response" do
-      Room.create!(valid_attributes)
-      get rooms_url
-      expect(response).to be_successful
+    context "when not signed in" do
+      it "redirects to the sign-in page" do
+        get bookings_url
+        expect(response).to redirect_to(new_user_session_url)
+      end
     end
-  end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      room = Room.create!(valid_attributes)
-      get room_url(room)
-      expect(response).to be_successful
-    end
-  end
+    context "when signed in" do
+      before { sign_in user }
 
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_room_url
-      expect(response).to be_successful
-    end
-  end
+      it "shows only the current user's bookings" do
+        other_user = create(:user)
+        other_room = create(:room)
 
-  describe "GET /edit" do
-    it "renders a successful response" do
-      room = Room.create!(valid_attributes)
-      get edit_room_url(room)
-      expect(response).to be_successful
+        create(:booking,
+               user: user,
+               room: room,
+               starts_at: Time.zone.parse("2025-12-15 10:00"),
+               ends_at:   Time.zone.parse("2025-12-15 11:00"))
+
+        create(:booking,
+               user: other_user,
+               room: other_room,
+               starts_at: Time.zone.parse("2025-12-15 12:00"),
+               ends_at:   Time.zone.parse("2025-12-15 13:00"))
+
+        get bookings_url
+        expect(response).to be_successful
+
+    
+        expect(response.body).to include(user.email)
+        expect(response.body).not_to include(other_user.email)
+      end
     end
   end
 
   describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Room" do
-        expect {
-          post rooms_url, params: { room: valid_attributes }
-        }.to change(Room, :count).by(1)
-      end
+    before { sign_in user }
 
-      it "redirects to the created room" do
-        post rooms_url, params: { room: valid_attributes }
-        expect(response).to redirect_to(room_url(Room.last))
-      end
+    let(:valid_attributes) do
+      {
+        room_id: room.id,
+        starts_at: dt("2025-12-15 10:00"),
+        ends_at:   dt("2025-12-15 11:00"),
+        note: "Test booking"
+      }
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Room" do
-        expect {
-          post rooms_url, params: { room: invalid_attributes }
-        }.not_to change(Room, :count)
-      end
-
-      it "renders a response with 422 status" do
-        post rooms_url, params: { room: invalid_attributes }
-        expect(response).to have_http_status(422)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    let(:new_attributes) do
-      { name: "Room Updated", capacity: 15 }
-    end
-
-    context "with valid parameters" do
-      it "updates the requested room" do
-        room = Room.create!(valid_attributes)
-        patch room_url(room), params: { room: new_attributes }
-        room.reload
-        expect(room.name).to eq("Room Updated")
-        expect(room.capacity).to eq(15)
-      end
-
-      it "redirects to the room" do
-        room = Room.create!(valid_attributes)
-        patch room_url(room), params: { room: new_attributes }
-        expect(response).to redirect_to(room_url(room))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status" do
-        room = Room.create!(valid_attributes)
-        patch room_url(room), params: { room: invalid_attributes }
-        expect(response).to have_http_status(422)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested room" do
-      room = Room.create!(valid_attributes)
+    it "creates a booking for the current user" do
       expect {
-        delete room_url(room)
-      }.to change(Room, :count).by(-1)
+        post bookings_url, params: { booking: valid_attributes }
+      }.to change(Booking, :count).by(1)
+
+      booking = Booking.last
+      expect(booking.user).to eq(user)
+      expect(response).to redirect_to(booking_url(booking))
     end
 
-    it "redirects to the rooms list" do
-      room = Room.create!(valid_attributes)
-      delete room_url(room)
-      expect(response).to redirect_to(rooms_url)
+    it "rejects overlapping bookings for the same room" do
+      create(:booking,
+             user: user,
+             room: room,
+             starts_at: Time.zone.parse("2025-12-15 10:00"),
+             ends_at:   Time.zone.parse("2025-12-15 11:00"))
+
+      overlapping = {
+        room_id: room.id,
+        starts_at: dt("2025-12-15 10:30"),
+        ends_at:   dt("2025-12-15 11:30"),
+        note: "Overlapping"
+      }
+
+      expect {
+        post bookings_url, params: { booking: overlapping }
+      }.not_to change(Booking, :count)
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to include("This room is already booked for that time.")
+    end
+  end
+
+  describe "authorization (cannot access someone else's booking)" do
+    before { sign_in user }
+
+    it "redirects from SHOW" do
+      other_user = create(:user)
+      other_booking = create(:booking, user: other_user, room: room)
+
+      get booking_url(other_booking)
+      expect(response).to redirect_to(bookings_url)
+
+      follow_redirect!
+      expect(response.body).to include("You are not allowed to access this booking.")
+    end
+
+    it "redirects from EDIT" do
+      other_user = create(:user)
+      other_booking = create(:booking, user: other_user, room: room)
+
+      get edit_booking_url(other_booking)
+      expect(response).to redirect_to(bookings_url)
+    end
+
+    it "does not allow UPDATE" do
+      other_user = create(:user)
+      other_booking = create(:booking, user: other_user, room: room)
+
+      patch booking_url(other_booking), params: { booking: { note: "hacked" } }
+      expect(response).to redirect_to(bookings_url)
+
+      other_booking.reload
+      expect(other_booking.note).not_to eq("hacked")
+    end
+
+    it "does not allow DESTROY" do
+      other_user = create(:user)
+      other_booking = create(:booking, user: other_user, room: room)
+
+      expect {
+        delete booking_url(other_booking)
+      }.not_to change(Booking, :count)
+
+      expect(response).to redirect_to(bookings_url)
     end
   end
 end
